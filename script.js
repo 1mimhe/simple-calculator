@@ -93,3 +93,9 @@ function postfixEval(postfix) {
 function clearScreen() {
     document.getElementById('result').value = '';
 }
+
+function removeLast() {
+    let str = document.getElementById('result').value;
+    document.getElementById('result').value =
+        str.substring(0, str.length - 1);
+}
