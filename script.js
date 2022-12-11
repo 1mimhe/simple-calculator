@@ -1,3 +1,9 @@
+'use strict';
+function calculate(str) {
+    str = separator(str);
+    return postfixEval(infixToPostfix(str));
+}
+
 function infixToPostfix(infix) {
     let stack = [];
     let result = [];
