@@ -110,3 +110,10 @@ function equal() {
     document.getElementById('last-result').value = str + ' = ' + result;
     document.getElementById('result').value = result;
 }
+
+function radical() {
+    let str = document.getElementById('result').value;
+    let result = Math.sqrt(calculate(str));
+    document.getElementById('last-result').value = '√' + str + ' = ' + result;
+    document.getElementById('result').value = result;
+}
