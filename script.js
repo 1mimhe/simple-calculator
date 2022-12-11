@@ -89,3 +89,7 @@ function postfixEval(postfix) {
 
     return stack.pop();
 }
+
+function clearScreen() {
+    document.getElementById('result').value = '';
+}
