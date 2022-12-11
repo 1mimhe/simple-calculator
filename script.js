@@ -104,3 +104,9 @@ function display(value) {
     document.getElementById('result').value += value;
 }
 
+function equal() {
+    let str = document.getElementById('result').value;
+    let result = calculate(str);
+    document.getElementById('last-result').value = str + ' = ' + result;
+    document.getElementById('result').value = result;
+}
