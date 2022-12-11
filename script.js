@@ -99,3 +99,8 @@ function removeLast() {
     document.getElementById('result').value =
         str.substring(0, str.length - 1);
 }
+
+function display(value) {
+    document.getElementById('result').value += value;
+}
+
