@@ -62,3 +62,24 @@ const operators = {
     '/': (a, b) => a / b,
     '^': (a, b) => a ** b
 };
+
+function postfixEval(postfix) {
+    let stack = [];
+
+    for (let temp of postfix) {
+        if (isNumber(temp))
+            stack.push(temp);
+        else if (temp in operators) {
+            let right =+ stack.pop();
+            let left =+ stack.pop();
+            if (isNaN(left)) {left = 0;}
+            let value = operators[temp](left, right);
+            stack.push(value);
+        }
+    }
+
+    if (stack.length > 1)
+        alert('Error');
+
+    return stack.pop();
+}
