@@ -117,3 +117,10 @@ function radical() {
     document.getElementById('last-result').value = '√' + str + ' = ' + result;
     document.getElementById('result').value = result;
 }
+
+function logarithm() {
+    let str = document.getElementById('result').value;
+    let result = Math.log(calculate(str));
+    document.getElementById('last-result').value = 'log ' + str + ' = ' + result;
+    document.getElementById('result').value = result;
+}
