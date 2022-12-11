@@ -124,3 +124,24 @@ function logarithm() {
     document.getElementById('last-result').value = 'log ' + str + ' = ' + result;
     document.getElementById('result').value = result;
 }
+
+function sinus() {
+    let str = document.getElementById('result').value;
+    let result = Math.sin(calculate(str));
+    document.getElementById('last-result').value = 'sin ' + str + ' = ' + result;
+    document.getElementById('result').value = result;
+}
+
+function cosine() {
+    let str = document.getElementById('result').value;
+    let result = Math.cos(calculate(str));
+    document.getElementById('last-result').value = 'cos ' + str + ' = ' + result;
+    document.getElementById('result').value = result;
+}
+
+function tangent() {
+    let str = document.getElementById('result').value;
+    let result = Math.tan(calculate(str));
+    document.getElementById('last-result').value = 'tan ' + str + ' = ' + result;
+    document.getElementById('result').value = result;
+}
