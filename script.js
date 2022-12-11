@@ -1,53 +1,31 @@
 function infixToPostfix(infix) {
-    // infix is String
-    let operators = [];
-    let operands = [];
+    let stack = [];
+    let result = [];
 
-    for (let i = 0; i < infix.length; i++) {
-        if (infix[i] === '(') {
-            operators.push(infix[i]);
-        } else if (infix[i] === ')') {
-            while (operators.length !== 0 &&
-            operators[operators.length - 1] !== '(') {
-                let a = operands.pop();
-                let b = operands.pop();
-                let op = operators.pop();
-                operands.push(op + b + a);
+    for (let temp of infix) {
+        if (isNumber(temp))
+            result.push(temp);
+        else if (temp === '(')
+            stack.push('(');
+        else if (temp === ')') {
+            while (stack[stack.length - 1] !== '(') {
+                result.push(stack.pop());
             }
-            operators.pop();
-        } else if (!isOperator(infix[i])) {
-            operands.push(String(infix[i]));
+            stack.pop();
         } else {
-            while (operators.length &&
-            getPriority(infix[i]) <= getPriority(operators[operators.length - 1])) {
-                let a = operands.pop()
-                let b = operands.pop()
-                let op = operators.pop();
-                operands.push(op + b + a);
+            while (stack.length && getPriority(temp) <= getPriority(stack[stack.length - 1])) {
+                result.push(stack.pop());
             }
-            operators.push(infix[i]);
+            stack.push(temp);
         }
     }
 
-    while (operators.length !== 0) {
-        let a = operands.pop()
-        let b = operands.pop()
-        let op = operators.pop();
-        operands.push(op + b + a);
+    while (stack.length !== 0) {
+        result.push(stack.pop());
     }
-
-    return operands.pop();
+    return result;
 }
 
-function isOperator(op) {
-    return !(op >= '0' && op <= '9');
-}
-
-function getPriority(op) {
-    if (op === '-' || op === '+')
-        return 1;
-    else if (op === '*' || op === '/')
-        return 2;
-    else if (op === '^')
-        return 3;
+function isNumber(op) {
+    return !isNaN(op);
 }
