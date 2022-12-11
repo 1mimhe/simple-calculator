@@ -1,7 +1,31 @@
 'use strict';
+
 function calculate(str) {
     str = separator(str);
     return postfixEval(infixToPostfix(str));
+}
+
+const operators = {
+    '+': (a, b) => a + b,
+    '-': (a, b) => a - b,
+    '*': (a, b) => a * b,
+    '/': (a, b) => a / b,
+    '^': (a, b) => a ** b
+};
+
+// for separate numbers and operators
+function separator(str) {
+    const arr = [...Object.keys(operators), '(', ')'];
+    for (let op of arr) {
+        str = str.replaceAll(op, ` ${op} `);
+    }
+    // for negative numbers
+    str = str.replaceAll(`(  - `, `(  -`);
+    // remove empty elements
+    str = str.split(' ').filter((value) => {
+        return value !== '';
+    });
+    return str;
 }
 
 function infixToPostfix(infix) {
@@ -32,23 +56,31 @@ function infixToPostfix(infix) {
     return result;
 }
 
-function isNumber(op) {
-    return !isNaN(op);
+function postfixEval(postfix) {
+    let stack = [];
+
+    for (let temp of postfix) {
+        if (isNumber(temp))
+            stack.push(temp);
+        else if (temp in operators) {
+            let right = +stack.pop();
+            let left = +stack.pop();
+            if (isNaN(left)) {
+                left = 0;
+            }
+            let value = operators[temp](left, right);
+            stack.push(value);
+        }
+    }
+
+    if (stack.length > 1)
+        alert('Error');
+
+    return stack.pop();
 }
 
-// for separate numbers and operators
-function separator(str) {
-    const arr = [...Object.keys(operators), '(', ')'];
-    for (let op of arr) {
-        str = str.replaceAll(op, ` ${op} `);
-    }
-    // for negative numbers
-    str = str.replaceAll(`(  - `, `(  -`);
-    // remove empty elements
-    str = str.split(' ').filter((value) => {
-        return value !== '';
-    });
-    return str;
+function isNumber(op) {
+    return !isNaN(op);
 }
 
 function getPriority(op) {
@@ -59,35 +91,6 @@ function getPriority(op) {
     if (op === '^')
         return 3;
     return 0;
-}
-
-const operators = {
-    '+': (a, b) => a + b,
-    '-': (a, b) => a - b,
-    '*': (a, b) => a * b,
-    '/': (a, b) => a / b,
-    '^': (a, b) => a ** b
-};
-
-function postfixEval(postfix) {
-    let stack = [];
-
-    for (let temp of postfix) {
-        if (isNumber(temp))
-            stack.push(temp);
-        else if (temp in operators) {
-            let right =+ stack.pop();
-            let left =+ stack.pop();
-            if (isNaN(left)) {left = 0;}
-            let value = operators[temp](left, right);
-            stack.push(value);
-        }
-    }
-
-    if (stack.length > 1)
-        alert('Error');
-
-    return stack.pop();
 }
 
 function clearScreen() {
