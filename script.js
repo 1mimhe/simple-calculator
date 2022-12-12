@@ -104,6 +104,9 @@ function removeLast() {
 }
 
 function display(value) {
+    if (value === '-')
+        document.getElementById('result').value += '(' + value;
+    else
     document.getElementById('result').value += value;
 }
 
