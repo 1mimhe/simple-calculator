@@ -65,7 +65,7 @@ function postfixEval(postfix) {
         else if (temp in operators) {
             let right = +stack.pop();
             let left = +stack.pop();
-            if (isNaN(left)) {
+            if (isNaN(left) && temp === '-') {
                 left = 0;
             }
             let value = operators[temp](left, right);
@@ -74,7 +74,8 @@ function postfixEval(postfix) {
     }
 
     if (stack.length > 1)
-        alert('Error');
+        return false;
+
 
     return stack.pop();
 }
@@ -93,18 +94,28 @@ function getPriority(op) {
     return 0;
 }
 
+// DOM Part
 function clearScreen() {
+    if (document.getElementById('result').value === 'SYNTAX ERROR!')
+        document.getElementById('result').style.color = 'black';
     document.getElementById('result').value = '';
 }
 
 function removeLast() {
     let str = document.getElementById('result').value;
+    if (str === 'SYNTAX ERROR!')
+        clearScreen();
+    else
     document.getElementById('result').value =
         str.substring(0, str.length - 1);
 }
 
 function display(value) {
-    if (value === '-')
+    let lastValue = document.getElementById('result').value;
+    if (lastValue === 'SYNTAX ERROR!')
+        clearScreen();
+    let lastCharOfValue = lastValue.slice(-1);
+    if (value === '-' && lastCharOfValue in operators)
         document.getElementById('result').value += '(' + value;
     else
     document.getElementById('result').value += value;
@@ -112,9 +123,15 @@ function display(value) {
 
 function equal() {
     let str = document.getElementById('result').value;
+    if (!str)
+        return;
     let result = calculate(str);
-    document.getElementById('last-result').value = str + ' = ' + result;
-    document.getElementById('result').value = result;
+    if (!isNumber(result)) {
+        syntaxError();
+    } else {
+        document.getElementById('last-result').value = str + ' = ' + result;
+        document.getElementById('result').value = result;
+    }
 }
 
 function radical() {
@@ -150,4 +167,9 @@ function tangent() {
     let result = Math.tan(calculate(str));
     document.getElementById('last-result').value = 'tan ' + str + ' = ' + result;
     document.getElementById('result').value = result;
+}
+
+function syntaxError() {
+    document.getElementById('result').value = 'SYNTAX ERROR!';
+    document.getElementById('result').style.color = 'red';
 }
