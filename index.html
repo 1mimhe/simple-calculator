@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <title>Structure Breaker Calculator</title>
 </head>
-<body class="bg-dark bg-opacity-20">
+<body class="bg-dark">
 <nav class="navbar navbar-expand-lg bg-secondary bg-opacity-75">
     <div class="container-fluid">
         <a class="navbar-brand">
@@ -43,98 +43,101 @@
         <div class="input-group mt-2">
             <input type="text" class="form-control" placeholder="Result" aria-label="Result"
                    aria-describedby="basic-addon1" id="result">
-            <button class="btn btn-danger btn-lg"><i class="bi bi-backspace-fill"></i></button>
+            <button class="btn btn-warning btn-lg"><i class="bi bi-backspace-fill"></i></button>
         </div>
     </div>
     <hr>
     <div class="row" style="padding: 1rem">
         <div class="col">
             <div class="row">
-                <button class="btn btn-outline-info">log</button>
+                <button class="btn btn-outline-info" onclick="logarithm()">log</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-info">sin</button>
+                <button class="btn btn-outline-info" onclick="sinus()">sin</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-info">cos</button>
+                <button class="btn btn-outline-info" onclick="cosine()">cos</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-info">tan</button>
-            </div>
-        </div>
-        <div class="col">
-            <div class="row">
-                <button class="btn btn-outline-dark">7</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-dark">4</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-dark">1</button>
-            </div>
-            <div class="row">
-                <button class="btn btn btn-outline-dark"><i class="bi bi-dot"></i></button>
+                <button class="btn btn-outline-info" onclick="tangent()">tan</button>
             </div>
         </div>
         <div class="col">
             <div class="row">
-                <button class="btn btn-outline-dark">8</button>
+                <button class="btn btn-outline-dark" onclick="display('7')">7</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-dark">5</button>
+                <button class="btn btn-outline-dark" onclick="display('4')">4</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-dark">2</button>
+                <button class="btn btn-outline-dark" onclick="display('1')">1</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-dark">0</button>
-            </div>
-        </div>
-        <div class="col">
-            <div class="row">
-                <button class="btn btn-outline-dark">9</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-dark">6</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-dark">3</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-danger"><i class="bi bi-arrow-counterclockwise"></i></button>
+                <button class="btn btn btn-outline-dark" onclick="display('.')"><i class="bi bi-dot"></i></button>
             </div>
         </div>
         <div class="col">
             <div class="row">
-                <button class="btn btn-outline-primary"><i class="bi bi-slash-lg"></i></button>
+                <button class="btn btn-outline-dark" onclick="display('8')">8</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-primary"><i class="bi bi-x-lg"></i></button>
+                <button class="btn btn-outline-dark" onclick="display('5')">5</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-primary"><i class="bi bi-dash-lg"></i></button>
+                <button class="btn btn-outline-dark" onclick="display('2')">2</button>
             </div>
             <div class="row">
-                <button class="btn btn-outline-primary"><i class="bi bi-plus-lg"></i></button>
-            </div>
-        </div>
-        <div class="col">
-            <div class="row">
-                <button class="btn btn-outline-primary">(</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-primary">)</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-primary">√</button>
-            </div>
-            <div class="row">
-                <button class="btn btn-outline-primary">^</button>
+                <button class="btn btn-outline-dark" onclick="display('0')">0</button>
             </div>
         </div>
         <div class="col">
             <div class="row">
-                <button class="btn btn-success align-baseline" style="height: 9.5rem; margin-left: 0.2rem">=</button>
+                <button class="btn btn-outline-dark" onclick="display('9')">9</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-dark" onclick="display('6')">6</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-dark" onclick="display('3')">3</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-danger" onclick="clearScreen()"><i class="bi bi-arrow-counterclockwise"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display('/')"><i class="bi bi-slash-lg"></i></button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display('*')"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display('-')"><i class="bi bi-dash-lg"></i></button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display('+')"><i class="bi bi-plus-lg"></i></button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display('(')">(</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display(')')">)</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="radical()">√</button>
+            </div>
+            <div class="row">
+                <button class="btn btn-outline-primary" onclick="display('^')">^</button>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <button class="btn btn-success align-baseline" style="height: 9.5rem; margin-left: 0.2rem"
+                        onclick="equal()">=
+                </button>
             </div>
         </div>
     </div>
