@@ -103,9 +103,7 @@ function clearScreen() {
 
 function removeLast() {
     let str = document.getElementById('result').value;
-    if (str === 'SYNTAX ERROR!' ||
-        str === 'log' || str === 'sin' ||
-        str === 'cos' || str === 'tan')
+    if (str === 'SYNTAX ERROR!')
         clearScreen();
     else
         document.getElementById('result').value =
@@ -138,6 +136,8 @@ function equal() {
 
 function radical() {
     let str = document.getElementById('result').value;
+    if (!str)
+        return;
     let result = Math.sqrt(calculate(str));
     if (!isNumber(result)) {
         syntaxError();
@@ -149,6 +149,8 @@ function radical() {
 
 function logarithm() {
     let str = document.getElementById('result').value;
+    if (!str)
+        return;
     let result = Math.log(calculate(str));
     if (!isNumber(result)) {
         syntaxError();
@@ -160,6 +162,8 @@ function logarithm() {
 
 function sinus() {
     let str = document.getElementById('result').value;
+    if (!str)
+        return;
     let result = Math.sin(calculate(str));
     document.getElementById('last-result').value = 'sin ' + str + ' = ' + result;
     document.getElementById('result').value = result;
@@ -167,6 +171,8 @@ function sinus() {
 
 function cosine() {
     let str = document.getElementById('result').value;
+    if (!str)
+        return;
     let result = Math.cos(calculate(str));
     document.getElementById('last-result').value = 'cos ' + str + ' = ' + result;
     document.getElementById('result').value = result;
@@ -174,6 +180,8 @@ function cosine() {
 
 function tangent() {
     let str = document.getElementById('result').value;
+    if (!str)
+        return;
     let result = Math.tan(calculate(str));
     if (!isNumber(result)) {
         syntaxError();
