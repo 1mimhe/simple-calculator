@@ -106,8 +106,8 @@ function removeLast() {
     if (str === 'SYNTAX ERROR!')
         clearScreen();
     else
-    document.getElementById('result').value =
-        str.substring(0, str.length - 1);
+        document.getElementById('result').value =
+            str.substring(0, str.length - 1);
 }
 
 function display(value) {
@@ -118,7 +118,7 @@ function display(value) {
     if (value === '-' && lastCharOfValue in operators)
         document.getElementById('result').value += '(' + value;
     else
-    document.getElementById('result').value += value;
+        document.getElementById('result').value += value;
 }
 
 function equal() {
@@ -137,15 +137,23 @@ function equal() {
 function radical() {
     let str = document.getElementById('result').value;
     let result = Math.sqrt(calculate(str));
-    document.getElementById('last-result').value = '√' + str + ' = ' + result;
-    document.getElementById('result').value = result;
+    if (!isNumber(result)) {
+        syntaxError();
+    } else {
+        document.getElementById('last-result').value = '√' + str + ' = ' + result;
+        document.getElementById('result').value = result;
+    }
 }
 
 function logarithm() {
     let str = document.getElementById('result').value;
     let result = Math.log(calculate(str));
-    document.getElementById('last-result').value = 'log ' + str + ' = ' + result;
-    document.getElementById('result').value = result;
+    if (!isNumber(result)) {
+        syntaxError();
+    } else {
+        document.getElementById('last-result').value = 'log ' + str + ' = ' + result;
+        document.getElementById('result').value = result;
+    }
 }
 
 function sinus() {
@@ -165,8 +173,12 @@ function cosine() {
 function tangent() {
     let str = document.getElementById('result').value;
     let result = Math.tan(calculate(str));
-    document.getElementById('last-result').value = 'tan ' + str + ' = ' + result;
-    document.getElementById('result').value = result;
+    if (!isNumber(result)) {
+        syntaxError();
+    } else {
+        document.getElementById('last-result').value = 'tan ' + str + ' = ' + result;
+        document.getElementById('result').value = result;
+    }
 }
 
 function syntaxError() {
