@@ -103,7 +103,9 @@ function clearScreen() {
 
 function removeLast() {
     let str = document.getElementById('result').value;
-    if (str === 'SYNTAX ERROR!')
+    if (str === 'SYNTAX ERROR!' ||
+        str === 'log' || str === 'sin' ||
+        str === 'cos' || str === 'tan')
         clearScreen();
     else
         document.getElementById('result').value =
