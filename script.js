@@ -117,6 +117,8 @@ function display(value) {
     let lastCharOfValue = lastValue.slice(-1);
     if (value === '-' && lastCharOfValue in operators)
         document.getElementById('result').value += '(' + value;
+    else if (value === '(' && isNumber(lastCharOfValue) && lastValue !== '')
+        document.getElementById('result').value += '*' + value;
     else
         document.getElementById('result').value += value;
 }
